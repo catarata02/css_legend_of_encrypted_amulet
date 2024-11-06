@@ -15,7 +15,7 @@ public class BirthdayParser {
     public static final int CSV_INDEX_BIRTHDAY = 2;
     public static final int CSV_INDEX_EMAIL = 3;
 
-    public List<Birthday> parse(String content) {
+    public List<BirthdayDto> parse(String content) {
         if (content.isBlank())
             return Collections.emptyList();
 
@@ -33,11 +33,11 @@ public class BirthdayParser {
         return allLines;
     }
 
-    private Birthday parseLineToBirthday(String line) {
+    private BirthdayDto parseLineToBirthday(String line) {
         List<String> properties = Arrays.stream(line.split(","))
                 .map(String::trim)
                 .toList();
-        return new Birthday(
+        return new BirthdayDto(
                 properties.get(CSV_INDEX_LAST_NAME), 
                 properties.get(CSV_INDEX_FIRST_NAME), 
                 getLocalDateFromString(properties.get(CSV_INDEX_BIRTHDAY)), 
