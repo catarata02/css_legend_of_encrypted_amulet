@@ -2,7 +2,7 @@ import org.example.Hello
 import org.junit.jupiter.api.Assertions.*
 import kotlin.test.Test
 
-class HelloTestKotlin{
+class BirthdayParserTestKotlin{
     val hello = Hello()
 
     @Test
