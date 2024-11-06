@@ -1,14 +1,10 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NotificationServiceEmail implements NotificationService {
 
     
-    private List<BirthdayEmail> sentEmails = new ArrayList<>();
-
-    public NotificationServiceEmail() {
-    }
+    private final List<BirthdayEmail> sentEmails = new ArrayList<>();
 
     @Override
     public boolean send(List<BirthdayDto> birthdayDtoList) {
