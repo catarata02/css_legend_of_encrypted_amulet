@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BirthdayParser {
     // Define the formatter with the specific pattern
@@ -14,6 +13,7 @@ public class BirthdayParser {
     public static final int CSV_INDEX_FIRST_NAME = 1;
     public static final int CSV_INDEX_BIRTHDAY = 2;
     public static final int CSV_INDEX_EMAIL = 3;
+    public static final String LINE_BREAK = "\n";
 
     public List<BirthdayDto> parse(String content) {
         if (content.isBlank())
@@ -27,10 +27,9 @@ public class BirthdayParser {
 
     @NotNull
     private static List<String> getLinesWithoutHeader(String fileContent) {
-        List<String> allLines = Arrays.stream(fileContent.split("\n"))
+        return Arrays.stream(fileContent.split(LINE_BREAK))
                 .skip(1)
-                .collect(Collectors.toList());
-        return allLines;
+                .toList();
     }
 
     private BirthdayDto parseLineToBirthday(String line) {

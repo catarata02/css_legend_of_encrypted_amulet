@@ -10,9 +10,8 @@ public class BirthdayApp {
 
     public List<BirthdayDto> getTodaysBirthdays() {
         LocalDate today = LocalDate.now();
-        List<BirthdayDto> todaysBirthdayDtos = birthdayDtoList.stream()
+        return birthdayDtoList.stream()
                 .filter(birthdayDto -> birthdayDto.sameBirthday(today))
                 .toList();
-        return todaysBirthdayDtos;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BirthdayAppTest {
+class BirthdayAppTest {
    
 
     private BirthdayApp birthdayApp;
@@ -26,7 +26,6 @@ public class BirthdayAppTest {
         List<BirthdayDto> result = birthdayApp.getTodaysBirthdays();
         
         assertEquals(Arrays.asList(todaysBirthdayDto), result);
-        
     }
 
 }

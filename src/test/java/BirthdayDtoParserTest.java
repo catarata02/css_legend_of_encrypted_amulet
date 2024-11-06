@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BirthdayDtoParserTest {
 
 
-    private BirthdayParser birthdayParser = new BirthdayParser();
+    private final BirthdayParser birthdayParser = new BirthdayParser();
 
     @Test
     @DisplayName("GIVEN empty file WHEN parsing THEN empty list returned")
