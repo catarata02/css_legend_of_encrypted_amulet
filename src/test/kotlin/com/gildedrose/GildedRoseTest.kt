@@ -137,8 +137,8 @@ internal class GildedRoseTest {
 
         @Test
         fun `with sellIn above 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
-            val expectedAfterUpdate = createSulfurasItem(sellIn = 16, quality = 41)
-            val items = listOf(createSulfurasItem( 16, 41))
+            val expectedAfterUpdate = createSulfurasItem(sellIn = 16)
+            val items = listOf(createSulfurasItem( 16))
             val app = GildedRose(items)
 
             app.updateQuality()
@@ -148,19 +148,8 @@ internal class GildedRoseTest {
 
         @Test
         fun `with sellIn below 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
-            val expectedAfterUpdate = createSulfurasItem(sellIn = -10, quality = 41)
-            val items = listOf(createSulfurasItem( -10, 41))
-            val app = GildedRose(items)
-
-            app.updateQuality()
-
-            assertEquals(expectedAfterUpdate, app.items[0])
-        }
-
-        @Test
-        fun `with too high quality WHEN updateQuality THEN quality is still 100`() {
-            val expectedAfterUpdate = createSulfurasItem(sellIn = -10, quality = 100)
-            val items = listOf(createSulfurasItem( -10, 100))
+            val expectedAfterUpdate = createSulfurasItem(sellIn = -10)
+            val items = listOf(createSulfurasItem( -10))
             val app = GildedRose(items)
 
             app.updateQuality()
@@ -186,9 +175,8 @@ internal class GildedRoseTest {
     ) = Item(name = "Backstage passes to a TAFKAL80ETC concert", sellIn = sellIn, quality = quality)
 
     private fun createSulfurasItem(
-        sellIn: Int,
-        quality: Int,
-    ) = Item(name = "Sulfuras, Hand of Ragnaros", sellIn = sellIn, quality = quality)
+        sellIn: Int
+    ) = Item(name = "Sulfuras, Hand of Ragnaros", sellIn = sellIn, quality = 80)
 }
 
 
