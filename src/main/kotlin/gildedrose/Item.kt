@@ -57,7 +57,6 @@ class AgedBrie(
             increaseQuality(1)
         decreaseSellIn()
     }
-
 }
 
 class BackestagePass(
@@ -84,6 +83,19 @@ class Sulfuras(
 ) : BaseItem(name = SULFURAS_NAME, sellIn = extSellIn, quality = extQuality) {
     override fun updateQuality() {
 
+    }
+}
+
+class ConjuredItem(
+    val extSellIn: Int,
+    val extQuality: Int,
+) : BaseItem(name = SULFURAS_NAME, sellIn = extSellIn, quality = extQuality) {
+    override fun updateQuality() {
+        decreaseQuality(2)
+        if (this.sellIn < 0) {
+            decreaseQuality(2)
+        }
+        decreaseSellIn()
     }
 }
 
