@@ -1,258 +1,53 @@
-# Kata: "Birthday Greetings"
+_Support this and all my katas via [Patreon](https://www.patreon.com/EmilyBache)_
 
-As you’re a very friendly person, you would like to send a birthday note to all the friends you have. But you have a lot of friends, and a bit lazy, it may take some time to write all the notes by hand.
-The good news is that computers can do it automatically for you.
+# Gilded Rose Refactoring Kata
 
+You can find out more about this exercise in my YouTube video [Why Developers LOVE The Gilded Rose Kata](https://youtu.be/Mt4XpGxigT4). I also have a video of a worked solution in Java - [Gilded Rose Kata, Hands-on](https://youtu.be/OdnV8hc9L7I)
 
-## Friends Data
+I use this kata as part of my work as a technical coach. I wrote a lot about the coaching method I use in this book [Technical Agile Coaching with the Samman method](https://leanpub.com/techagilecoach). A while back I wrote this article ["Writing Good Tests for the Gilded Rose Kata"](http://coding-is-like-cooking.info/2013/03/writing-good-tests-for-the-gilded-rose-kata/) about how you could use this kata in a [coding dojo](https://leanpub.com/codingdojohandbook).
 
-Imagine you have a flat file with all your friends:
 
-```
-last_name, first_name, date_of_birth, email
-Doe, John, 1982/10/08, john.doe@foobar.com
-Ann, Mary, 1975/09/11, mary.ann@foobar.com
-```
+## How to use this Kata
 
+The simplest way is to just clone the code and start hacking away improving the design. You'll want to look at the ["Gilded Rose Requirements"](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/main/GildedRoseRequirements.md) which explains what the code is for. I strongly advise you that you'll also need some tests if you want to make sure you don't break the code while you refactor.
 
-And you want to send them a happy birthday email on their birth date:
+You could write some unit tests yourself, using the requirements to identify suitable test cases. I've provided a failing unit test in a popular test framework as a starting point for most languages.
 
-```
-Subject: Happy Birthday!
+Alternatively, use the Approval tests provided in this repository. (Read more about that in the section "Text-based Approval Testing").
 
-Happy birthday, dear <first_name>!
-```
+The idea of the exercise is to do some deliberate practice, and improve your skills at designing test cases and refactoring. The idea is not to re-write the code from scratch, but rather to practice taking small steps, running the tests often, and incrementally improving the design.
 
+### Gilded Rose Requirements in other languages
 
-## Software Implementation
+- [English](GildedRoseRequirements.md)
+- [Español](GildedRoseRequirements_es.md)
+- [Français](GildedRoseRequirements_fr.md)
+- [Italiano](GildedRoseRequirements_it.md)
+- [日本語](GildedRoseRequirements_jp.md)
+- [Português](GildedRoseRequirements_pt-BR.md)
+- [Русский](GildedRoseRequirements_ru.md)
+- [ไทย](GildedRoseRequirements_th.md)
+- [中文](GildedRoseRequirements_zh.txt)
+- [한국어](GildedRoseRequirements_kr.md)
+- [German](GildedRoseRequirements_de.md)
+- [Euskara](GildedRoseRequirements_eu.md)
 
-How would this software look like? 
+## Text-Based Approval Testing
 
-Try to implement it so you can easily change:
-- The way you retrieve the friends data (for instance, try switching to a SQLite database).
-- The way you send the note (for instance, imagine you want to send SMS instead of emails).
-Testing
+Most language versions of this code have a [TextTest](https://texttest.org) fixture for Approval testing. For information about this, see the [TextTests README](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main/texttests)
 
-What kind of tests would you write? Would you use mocks?
+## History of the exercise
 
+This Kata was originally created by Terry Hughes (http://twitter.com/TerryHughes). It is already on GitHub [here](https://github.com/NotMyself/GildedRose). Bobby Johnson described the kata in an article titled "Refactor This: The Gilded Rose Kata", but unfortunately it is no longer on the internet. I found it on the Wayback Machine [here](https://web.archive.org/web/20240525015111/https://iamnotmyself.com/refactor-this-the-gilded-rose-kata/).
 
-Once you finished this feature, read on to get the new features request from management… (scroll down)
+I translated the original C# into a few other languages, (with a little help from my friends!), and slightly changed the starting position. This means I've actually done a small amount of refactoring already compared with the original form of the kata, and made it easier to get going with writing tests by giving you one failing unit test to start with. I also added test fixtures for Text-Based approval testing with TextTest (see [the TextTests](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main/texttests))
 
-### Additional Features
-1 Friends born on February 29th should have their birthday greeted on February 28th.
-<div style="height: 1000px;"></div>
+As Bobby Johnson points out in his article "Why Most Solutions to Gilded Rose Miss The Bigger Picture" (on the Wayback Machine [here](https://web.archive.org/web/20230530152324/https://iamnotmyself.com/why-most-solutions-to-gilded-rose-miss-the-bigger-picture/)), it'll actually give you
+better practice at handling a legacy code situation if you do this Kata in the original C#. However, I think this kata
+is also really useful for practicing writing good tests using different frameworks and approaches, and the small changes I've made help with that. I think it's also interesting to compare what the refactored code and tests look like in different programming languages.
 
+## Contributing
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2 The input format has changed, now it is not read anymore from a file exported from a database, but we get the information from an API call in a json format. Adjust your code to be able to process also this input format
-```
-[
-    {
-        "last_name": "Doe",
-        "first_name": "John",
-        "date_of_birth": "1982/10/08",
-        "email": "john.doe@foobar.com"
-    },
-    {
-        "last_name": "Ann",
-        "first_name": "Mary",
-        "date_of_birth": "1975/09/11",
-        "email": "mary.ann@foobar.com"
-    }
-]
-
-```
-
-<div style="height: 1000px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3 Provide an interface providing a list of upcoming birthdays for the upcoming month
-<div style="height: 1000px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4 Oh shit, some mistake happened. Unfortunately we use DDD (Domain Driven Design) only for the technical part, not for the requirements.. we misunderstood the last feature
--> send a list of upcoming birthdays for the upcoming week
-<div style="height: 1000px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5 Send a Birthday Reminder note when it is someone else birthday :
-```
-Subject: Birthday Reminder
-
-Dear <first_name>,
-
-Today is <someone_else_first_name> <someone_else_last_name>'s birthday.
-
-Don't forget to send him a message!
-```
-<div style="height: 1000px;"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6 Send a single Birthday Reminder note
-```
-Subject: Birthday Reminder
-
-Dear <first_name>,
-
-Today is <full_name_1>, <full_name_2>, and <full_name_3>'s birthday. 
-
-Don't forget to send them a message!
-```
+Contributions are encouraged! You could add a translations of the specification
+in another language or a new starting point for your favorite programming
+language. Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
