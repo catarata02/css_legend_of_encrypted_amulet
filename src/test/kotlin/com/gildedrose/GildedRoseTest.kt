@@ -156,6 +156,17 @@ internal class GildedRoseTest {
 
             assertEquals(expectedAfterUpdate, app.items[0])
         }
+
+        @Test
+        fun `with too high quality WHEN updateQuality THEN quality is still 100`() {
+            val expectedAfterUpdate = createSulfurasItem(sellIn = -10, quality = 100)
+            val items = listOf(createSulfurasItem( -10, 100))
+            val app = GildedRose(items)
+
+            app.updateQuality()
+
+            assertEquals(expectedAfterUpdate, app.items[0])
+        }
         
     }
 
