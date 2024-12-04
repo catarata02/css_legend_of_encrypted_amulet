@@ -2,55 +2,29 @@ package com.gildedrose
 
 class GildedRose(var items: List<Item>) {
 
+    private lateinit var typedItems: List<BaseItem>
+    
+    init {
+        typedItems = items.map { mapToBaseItem(it) }
+    }
+
     fun updateQuality() {
-        for (i in items.indices) {
-            if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                if (items[i].quality > 0) {
-                    if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                        items[i].quality = items[i].quality - 1
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1
+        typedItems.forEach { it.updateQuality() }
+        items = typedItems.map { mapToItem(it) }
+       
+    }
 
-                    if (items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
+    private fun mapToItem(baseItem: BaseItem): Item {
+        return Item(name = baseItem.name, sellIn = baseItem.sellIn, quality = baseItem.quality)
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1
-                            }
-                        }
-                    }
-                }
-            }
 
-            if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                items[i].sellIn = items[i].sellIn - 1
-            }
-
-            if (items[i].sellIn < 0) {
-                if (items[i].name != "Aged Brie") {
-                    if (items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].quality > 0) {
-                            if (items[i].name != "Sulfuras, Hand of Ragnaros") {
-                                items[i].quality = items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1
-                    }
-                }
-            }
+    private fun mapToBaseItem(item: Item) : BaseItem {
+        return when (item.name) {
+            AGED_BRIE_NAME -> AgedBrie(extSellIn = item.sellIn, extQuality = item.quality)
+            BACKSTAGE_PASSES -> BackestagePass(extSellIn = item.sellIn, extQuality = item.quality)
+            SULFURAS_NAME -> Sulfuras(extSellIn = item.sellIn, extQuality = item.quality)
+            else -> NormalItem(extSellIn = item.sellIn, extQuality = item.quality, extName = "foo")
         }
     }
 
