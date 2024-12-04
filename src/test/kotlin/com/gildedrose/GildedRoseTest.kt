@@ -31,6 +31,17 @@ internal class GildedRoseTest {
 
             assertEquals(expectedAfterUpdate, app.items[0])
         }
+
+        @Test
+        fun `with negative sellIn and quality is 0 WHEN updateQuality THEN sellIn is decreased by 1 and quality stays 0`() {
+            val expectedAfterUpdate = createNormalItem(-2, 0)
+            val items = listOf(createNormalItem(-1, 0))
+            val app = GildedRose(items)
+
+            app.updateQuality()
+
+            assertEquals(expectedAfterUpdate, app.items[0])
+        }
     }
 
     @Nested
@@ -68,6 +79,7 @@ internal class GildedRoseTest {
 
             assertEquals(expectedAfterUpdate, app.items[0])
         }
+
     }
     
     @Nested
@@ -116,6 +128,35 @@ internal class GildedRoseTest {
 
             assertEquals(expectedAfterUpdate, app.items[0])
         }
+
+    }
+
+    @Nested
+    @DisplayName("GIVEN Sulfuras, Hand of Ragnaros ")
+    inner class Sulfuras{
+
+        @Test
+        fun `with sellIn above 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
+            val expectedAfterUpdate = createSulfurasItem(sellIn = 16, quality = 41)
+            val items = listOf(createSulfurasItem( 16, 41))
+            val app = GildedRose(items)
+
+            app.updateQuality()
+
+            assertEquals(expectedAfterUpdate, app.items[0])
+        }
+
+        @Test
+        fun `with sellIn below 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
+            val expectedAfterUpdate = createSulfurasItem(sellIn = -10, quality = 41)
+            val items = listOf(createSulfurasItem( -10, 41))
+            val app = GildedRose(items)
+
+            app.updateQuality()
+
+            assertEquals(expectedAfterUpdate, app.items[0])
+        }
+        
     }
 
     private fun createNormalItem(
@@ -132,6 +173,11 @@ internal class GildedRoseTest {
         sellIn: Int,
         quality: Int,
     ) = Item(name = "Backstage passes to a TAFKAL80ETC concert", sellIn = sellIn, quality = quality)
+
+    private fun createSulfurasItem(
+        sellIn: Int,
+        quality: Int,
+    ) = Item(name = "Sulfuras, Hand of Ragnaros", sellIn = sellIn, quality = quality)
 }
 
 
