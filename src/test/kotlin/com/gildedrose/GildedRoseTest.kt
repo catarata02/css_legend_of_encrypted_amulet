@@ -11,9 +11,20 @@ internal class GildedRoseTest {
     @DisplayName("GIVEN Normal Item")
     inner class NormalItems{
         @Test
-        fun `with positive sellIn and quality WHEN updateQuality THEN sellIn and quality are decreased by 1`() {
+        fun `with positive sellIn and quality is positive WHEN updateQuality THEN sellIn and quality are decreased by 1`() {
             val expectedAfterUpdate = createNormalItem(9, 49)
             val items = listOf(createNormalItem(10, 50))
+            val app = GildedRose(items)
+
+            app.updateQuality()
+
+            assertEquals(expectedAfterUpdate, app.items[0])
+        }
+
+        @Test
+        fun `with negative sellIn and quality is positive WHEN updateQuality THEN sellIn is decreased by 1 and quality is decreased by 2`() {
+            val expectedAfterUpdate = createNormalItem(-2, 48)
+            val items = listOf(createNormalItem(-1, 50))
             val app = GildedRose(items)
 
             app.updateQuality()
