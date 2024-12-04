@@ -28,14 +28,21 @@ abstract class BaseItem(
         this.sellIn -= 1
     }
 
-    protected fun increaseQuality() {
-        if (this.quality < 50)
-            this.quality += 1
+    protected fun increaseQuality(increaseBy: Int) {
+        if (this.quality < 51 - increaseBy) {
+            this.quality += increaseBy
+        } else {
+            this.quality = 50
+        }
+
     }
 
-    protected fun decreaseQuality() {
-        if (this.quality > 0)
-            this.quality -= 1
+    protected fun decreaseQuality(decreaseBy: Int) {
+        if (this.quality >= decreaseBy) {
+            this.quality -= decreaseBy
+        } else {
+            this.quality = 0
+        }
     }
 }
 
@@ -45,9 +52,9 @@ class AgedBrie(
 ) : BaseItem(name = AGED_BRIE_NAME, sellIn = extSellIn, quality = extQuality) {
 
     override fun updateQuality() {
-        increaseQuality()
+        increaseQuality(1)
         if (this.sellIn < 0)
-            increaseQuality()
+            increaseQuality(1)
         decreaseSellIn()
     }
 
@@ -62,16 +69,9 @@ class BackestagePass(
             this.quality = 0
         } else {
             when (this.sellIn) {
-                in 6..10 -> {
-                    increaseQuality()
-                    increaseQuality()
-                }
-                in 0 .. 5 -> {
-                    increaseQuality()
-                    increaseQuality()
-                    increaseQuality()
-                }
-                else -> increaseQuality()
+                in 6..10 -> increaseQuality(2)
+                in 0..5 -> increaseQuality(3)
+                else -> increaseQuality(1)
             }
         }
         decreaseSellIn()
@@ -93,9 +93,9 @@ class NormalItem(
     val extName: String,
 ) : BaseItem(name = extName, sellIn = extSellIn, quality = extQuality) {
     override fun updateQuality() {
-        decreaseQuality()
+        decreaseQuality(1)
         if (this.sellIn < 0) {
-            decreaseQuality()
+            decreaseQuality(1)
         }
         decreaseSellIn()
     }
