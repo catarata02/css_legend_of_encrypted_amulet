@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 internal class GildedRoseTest {
-    
+
     @Nested
     @DisplayName("GIVEN Normal Item")
-    inner class NormalItems{
+    inner class NormalItems {
         @Test
         fun `with positive sellIn and quality is positive WHEN updateQuality THEN sellIn and quality are decreased by 1`() {
             val expectedAfterUpdate = createNormalItem(9, 49)
@@ -18,7 +18,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -29,7 +29,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -40,13 +40,13 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
     }
 
     @Nested
     @DisplayName("GIVEN Aged Brie")
-    inner class AgedBrie{
+    inner class AgedBrie {
         @Test
         fun `with positive sellIn and quality less than 50 WHEN updateQuality THEN sellIn is decreased and quality is increased by 1`() {
             val expectedAfterUpdate = createAgedBrie(9, 41)
@@ -55,7 +55,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -66,7 +66,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -77,23 +77,23 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
     }
-    
+
     @Nested
     @DisplayName("GIVEN Backstage passes to a TAFKAL80ETC concert ")
-    inner class BackstagePasses{
+    inner class BackstagePasses {
         @Test
         fun `with sellIn above 11 and quality less than 50 WHEN updateQuality THEN sellIn is decreased and quality is increased by 1`() {
             val expectedAfterUpdate = createBackstageItem(sellIn = 15, quality = 42)
-            val items = listOf(createBackstageItem( 16, 41))
+            val items = listOf(createBackstageItem(16, 41))
             val app = GildedRose(items)
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -104,7 +104,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -115,7 +115,7 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
@@ -126,37 +126,46 @@ internal class GildedRoseTest {
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
     }
 
     @Nested
     @DisplayName("GIVEN Sulfuras, Hand of Ragnaros ")
-    inner class Sulfuras{
+    inner class Sulfuras {
 
         @Test
         fun `with sellIn above 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
             val expectedAfterUpdate = createSulfurasItem(sellIn = 16)
-            val items = listOf(createSulfurasItem( 16))
+            val items = listOf(createSulfurasItem(16))
             val app = GildedRose(items)
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
 
         @Test
         fun `with sellIn below 0 and quality less than 50 WHEN updateQuality THEN sellIn and quality stay the same`() {
             val expectedAfterUpdate = createSulfurasItem(sellIn = -10)
-            val items = listOf(createSulfurasItem( -10))
+            val items = listOf(createSulfurasItem(-10))
             val app = GildedRose(items)
 
             app.updateQuality()
 
-            assertEquals(expectedAfterUpdate, app.items[0])
+            assertItemsAreEqual(expectedAfterUpdate, app.items[0])
         }
-        
+
+    }
+
+    private fun assertItemsAreEqual(
+        expectedItem: Item,
+        actualItem: Item,
+        ) {
+        assertEquals(expectedItem.name, actualItem.name)
+        assertEquals(expectedItem.sellIn, actualItem.sellIn)
+        assertEquals(expectedItem.quality, actualItem.quality)
     }
 
     private fun createNormalItem(
@@ -175,7 +184,7 @@ internal class GildedRoseTest {
     ) = Item(name = "Backstage passes to a TAFKAL80ETC concert", sellIn = sellIn, quality = quality)
 
     private fun createSulfurasItem(
-        sellIn: Int
+        sellIn: Int,
     ) = Item(name = "Sulfuras, Hand of Ragnaros", sellIn = sellIn, quality = 80)
 }
 
