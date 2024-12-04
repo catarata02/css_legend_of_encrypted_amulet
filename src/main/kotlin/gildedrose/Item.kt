@@ -24,6 +24,14 @@ abstract class BaseItem(
     }
 
     abstract fun updateQuality()
+    protected fun decreaseSellIn() {
+        this.sellIn -= 1
+    }
+
+    protected fun increaseQuality() {
+        if (this.quality < 50)
+            this.quality += 1
+    }
 }
 
 class AgedBrie(
@@ -32,7 +40,10 @@ class AgedBrie(
 ) : BaseItem(name = AGED_BRIE_NAME, sellIn = extSellIn, quality = extQuality) {
 
     override fun updateQuality() {
-
+        decreaseSellIn()
+        increaseQuality()
+        if (this.sellIn < 0 )
+            increaseQuality()
     }
 
 }
@@ -61,7 +72,7 @@ class NormalItem(
     val extName: String,
 ) : BaseItem(name = extName, sellIn = extSellIn, quality = extQuality) {
     override fun updateQuality() {
-        this.sellIn -= 1
+        decreaseSellIn()
         if (this.quality > 0) {
             this.quality -= 1
             if (this.sellIn < 0) {
@@ -69,4 +80,5 @@ class NormalItem(
             }
         }
     }
+
 }
